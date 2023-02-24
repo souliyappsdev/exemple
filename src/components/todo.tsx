@@ -60,7 +60,7 @@ function todo() {
     return todos.filter((todo) => todo.completed).length;
   }, [todos]);
 
-  // Log ຂໍ້ມູນ
+  // Log ຂໍ້ມູນມາສະເເດງໃນ console
   console.log("=> inputValue...", inputValue);
 
   console.log("=> todos...", todos);
