@@ -1,28 +1,61 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import React, { memo, useCallback } from "react";
+import { useState, useMemo } from "react";
 
-export function Counter() {
-  const [count, setCount] = useState(0);
+const Child = memo(() => {
+  console.log("=> child rendered");
+  return <div>Child</div>;
+});
 
-  const handleClick = useCallback(() => {
-    setCount(count + 1);
-  }, [count]);
+type ChildProps = {
+  onChange: () => void;
+};
 
-  const memoizedValue = useMemo(() => {
-    return count * 2;
-  }, [count]);
+// const Child = memo(({ onChange }: ChildProps) => {
+//   console.log("=> child rendered");
+//   return <div>Child</div>;
+// });
 
-  useEffect(() => {
-    document.title = `You clicked ${count} times`;
-  }, [count]);
+// const Child = ({ onChange }: ChildProps) => {
+//   console.log("=> child rendered");
+//   return <div>Child</div>;
+// };
 
-  // console.log("=> count", count);
-  // console.log("=> memoizedValue", memoizedValue);
+const fibo = (n: number): number => {
+  return n <= 0 ? 0 : n === 1 ? 1 : fibo(n - 1) + fibo(n - 2);
+};
+
+function Counter() {
+  const [count1, setCount1] = useState(0);
+  const [count2, setCount2] = useState(0);
+
+  const count2Callback = useCallback(() => {
+    setCount2(count2 + 1);
+  }, [count2]);
+
+  // const f = fibo(count1);
+  const f = useMemo(() => {
+    return fibo(count1);
+  }, [count1]);
 
   return (
     <div>
-      <p>You clicked {count} times</p>
-      <p>The memoized value is {memoizedValue}</p>
-      <button onClick={handleClick}>Click me</button>
+      Count 1 = {count1}
+      <br />
+      Fibo = {f}
+      <br />
+      <br />
+      <button onClick={() => setCount1(count1 + 1)}>Add count 1</button>
+      <br />
+      <br />
+      <Child />
+      {/* <Child onChange={() => setCount2(count2 + 1)} /> */}
+      {/* <Child onChange={count2Callback} /> */}
+      Count 2 = {count2}
+      <br />
+      <br />
+      <button onClick={() => setCount2(count2 + 1)}>Add count 2</button>
     </div>
   );
 }
+
+export default Counter;

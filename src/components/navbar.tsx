@@ -4,18 +4,18 @@ import Todo from "./todo";
 import UseMemo from "./useMemo";
 import UseCallback from "./useCallback";
 import ReduxToolkit from "./reduxToolkit";
-import { Counter } from "./Counter";
+import Counter from "./Counter";
 
 enum NavItemType {
-  TODO = "TODO",
+  COUNTER = "COUNTER",
   USE_MEMO = "USE_MEMO",
   USE_CALLBACK = "USE_CALLBACK",
+  TODO = "TODO",
   REDUX_TOOLKIT = "REDUX_TOOLKIT",
-  COUNTER = "COUNTER",
 }
 
 const Navbar: React.FC = () => {
-  const [activeNavItem, setActiveNavItem] = useState(NavItemType.TODO);
+  const [activeNavItem, setActiveNavItem] = useState(NavItemType.COUNTER);
 
   const handleNavItemChange = (navItem: NavItemType) => {
     setActiveNavItem(navItem);
@@ -23,16 +23,16 @@ const Navbar: React.FC = () => {
 
   const renderActiveNavItem = () => {
     switch (activeNavItem) {
-      case NavItemType.TODO:
-        return <Todo />;
+      case NavItemType.COUNTER:
+        return <Counter />;
       case NavItemType.USE_MEMO:
         return <UseMemo />;
       case NavItemType.USE_CALLBACK:
         return <UseCallback />;
+      case NavItemType.TODO:
+        return <Todo />;
       case NavItemType.REDUX_TOOLKIT:
         return <ReduxToolkit />;
-      case NavItemType.COUNTER:
-        return <Counter />;
       default:
         return null;
     }
@@ -44,10 +44,10 @@ const Navbar: React.FC = () => {
         <nav>
           <ul>
             <li
-              className={activeNavItem === NavItemType.TODO ? "active" : ""}
-              onClick={() => handleNavItemChange(NavItemType.TODO)}
+              className={activeNavItem === NavItemType.COUNTER ? "active" : ""}
+              onClick={() => handleNavItemChange(NavItemType.COUNTER)}
             >
-              Todo
+              Counter
             </li>
             <li
               className={activeNavItem === NavItemType.USE_MEMO ? "active" : ""}
@@ -64,18 +64,18 @@ const Navbar: React.FC = () => {
               UseCallback
             </li>
             <li
+              className={activeNavItem === NavItemType.TODO ? "active" : ""}
+              onClick={() => handleNavItemChange(NavItemType.TODO)}
+            >
+              Todo
+            </li>
+            <li
               className={
                 activeNavItem === NavItemType.REDUX_TOOLKIT ? "active" : ""
               }
               onClick={() => handleNavItemChange(NavItemType.REDUX_TOOLKIT)}
             >
               ReduxToolkit
-            </li>
-            <li
-              className={activeNavItem === NavItemType.COUNTER ? "active" : ""}
-              onClick={() => handleNavItemChange(NavItemType.COUNTER)}
-            >
-              Counter
             </li>
           </ul>
         </nav>
