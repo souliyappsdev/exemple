@@ -39,7 +39,7 @@ function todo() {
   );
 
   // toggle the completed state of a todo
-  //handleToggleCompleted => toggle ໝາຍຕິກ ສະຖານະທີ່ສຳເລັດແລ້ວຂອງສິ່ງທີ່ຕ້ອງເຮັດS
+  //handleToggleCompleted => toggle ໝາຍຕິກ ສະຖານະທີ່ສຳເລັດແລ້ວຂອງສິ່ງທີ່ຕ້ອງເຮັດ
   const handleToggleCompleted = useCallback((id: number) => {
     setTodos((prevTodos) =>
       prevTodos.map((todo) => {
